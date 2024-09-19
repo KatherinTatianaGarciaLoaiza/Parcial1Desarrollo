@@ -2,9 +2,8 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    background: url('../images/Background.jpg') no-repeat center center fixed;
+    background: url('../images/Background.jpg') repeat;
     background-size: calc(100% / 3) 100%;
-    background-repeat: repeat-x;
     display: flex;
     justify-content: center;
     align-items: center;
