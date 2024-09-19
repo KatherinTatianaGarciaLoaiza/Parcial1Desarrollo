@@ -2,9 +2,8 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    background: url('../images/Background.jpg') no-repeat center center fixed;
-    background-size: calc(100% / 3) 100%;
-    background-repeat: repeat-x;
+    background: url('../images/Background.jpg') repeat;
+    background-size: calc(100% / 5) calc(100% / 2);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -113,7 +112,7 @@ body {
     width: 100%;
     text-align: center;
     padding: 10px 0;
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro con 80% de opacidad */
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
     position: absolute;
     bottom: 0;
