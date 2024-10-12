@@ -142,7 +142,7 @@ El administrador tendrá acceso a una interfaz gráfica agradable, amigable y f�
 <ul>
   <li>Metodo: <br> GET.</li>
   <li>Descripción: <br>Devuelve la lista de productos del inventario. Permite aplicar filtros por categoría, nombre, o precio.</li>
-  <li>#### Parámetros de consulta:
+  <li>Parámetros de consulta:
   <ul>
     <li>Categoria: <br>Filtrar por categoría de producto.</li>
     <li>Nombre: <br>Buscar un producto específico por su nombre.</li>
