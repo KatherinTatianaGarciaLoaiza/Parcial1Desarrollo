@@ -83,7 +83,7 @@ El administrador tendrá acceso a una interfaz gráfica agradable, amigable y f�
 
 #### 4.Modelo de capas:
 <ul>
-  El backend debe implementarse bajo un modelo de capas que divida la lógica de negocio de la aplicación en:
+  El backend debe implementarse bajo un modelo de capas que divida la lógica de negocio de la aplicación en:<br>
   <li>Controladores: <br>Manejan las solicitudes HTTP.</li>
   <li>Servicios: <br>Lógica de negocio para gestionar el inventario y autenticación de administradores.</li>
   <li>Modelos de datos: <br>Definición de los esquemas para productos y usuarios en la base de datos.</li>
