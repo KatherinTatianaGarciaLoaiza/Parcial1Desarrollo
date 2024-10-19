@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos del Inventario</title>
+    <link rel="stylesheet" href="../../styles/styles.css"> <!-- Archivo CSS para estilos -->
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Productos</h1>
+
+        <!-- Formulario para aplicar filtros -->
+        <form id="filtro-form">
+            <div class="form-group">
+                <label for="categoria">Categoría:</label>
+                <select id="categoria" name="categoria">
+                    <option value="" disabled selected>Seleccione una categoría</option>
+                    <!-- Las opciones se cargarán dinámicamente desde el backend -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="precio-min">Precio Mínimo:</label>
+                <input type="number" id="precio-min" name="precio-min" placeholder="Precio mínimo" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="precio-max">Precio Máximo:</label>
+                <input type="number" id="precio-max" name="precio-max" placeholder="Precio máximo" min="0">
+            </div>
+
+            <button type="submit">Aplicar Filtros</button>
+        </form>
+
+        <!-- Contenedor para las tarjetas de productos -->
+        <div id="producto-container" class="producto-container">
+            <!-- Las tarjetas de productos se cargarán dinámicamente aquí -->
+        </div>
+
+        <div id="mensaje"></div>
+    </div>
+</body>
+</html>

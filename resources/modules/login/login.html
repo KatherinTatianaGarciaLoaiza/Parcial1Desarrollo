@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión Administrador</title>
+    <link rel="stylesheet" href="../../styles/styles.css"> <!-- Archivo CSS para estilos -->
+</head>
+<body>
+    <div class="container">
+        <h1>Inicio de sesión</h1>
+        <form id="login-form" action="/login" method="POST">
+            <!-- Correo electrónico -->
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required>
+
+            <!-- Contraseña -->
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+
+            <!-- Botón de envío -->
+            <button type="submit">Iniciar sesión</button>
+        </form>
+
+        <!-- Mensaje de respuesta -->
+        <div id="mensaje"></div>
+    </div>
+</body>
+</html>

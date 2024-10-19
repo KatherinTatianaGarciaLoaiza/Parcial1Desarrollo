@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto</title>
+    <link rel="stylesheet" href="../../styles/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Agregar Producto</h1>
+        <form id="producto-form" action="/productos" method="POST">
+            <!-- Nombre del producto -->
+            <label for="nombre">Nombre del producto:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <!-- Categoría del producto -->
+            <label for="categoria">Categoría:</label>
+            <input type="text" id="categoria" name="categoria" required>
+
+            <!-- Precio del producto -->
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio" required step="0.01" min="0">
+
+            <!-- Cantidad en inventario -->
+            <label for="cantidad">Cantidad en inventario:</label>
+            <input type="number" id="cantidad" name="cantidad" required min="1">
+
+            <!-- Descripción del producto -->
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+
+            <!-- Botón de envío -->
+            <button type="submit">Agregar Producto</button>
+        </form>
+
+        <!-- Mensaje de respuesta -->
+        <div id="mensaje"></div>
+    </div>
+</body>
+</html>
