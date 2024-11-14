@@ -2,6 +2,7 @@ import express from "express";
 import swaggerJsdoc from "swagger-jsdoc";
 import * as swaggerUi from "swagger-ui-express";
 import { setContentType } from "./middlewares/middleware.mjs";
+import { UsuarioRoutes } from "./routes/UsuarioRoutes.mjs";
 
 const app = express();
 
@@ -28,14 +29,14 @@ app.get("/api-docs.json", (req, res) => {
 app.use(express.json());
 app.use(setContentType);
 
-//const courseRoutes = new CourseRoutes();
+const usuarioRoutes = new UsuarioRoutes();
 //const degreeRoutes = new DegreeRoutes();
 //const facultyRoutes = new FacultyRoutes();
 //const professorRoutes = new ProfessorRoutes();
 //const studentRoutes = new StudentRoutes();
-/*
-app.use("/courses", courseRoutes.router);
-app.use("/degrees", degreeRoutes.router);
+
+app.use("/users", usuarioRoutes.router);
+/*app.use("/degrees", degreeRoutes.router);
 app.use("/faculties", facultyRoutes.router);
 app.use("/professors", professorRoutes.router);
 app.use("/students", studentRoutes.router);

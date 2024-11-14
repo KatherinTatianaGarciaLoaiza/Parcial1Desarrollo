@@ -6,8 +6,10 @@ import { CustomError } from "../utils/CustomError.mjs";
 class UsuarioService {
   getAll = async () => {
     try {
-      const results = await new Db().query("SELECT * FROM usuario");
-      return results.rows.map((row) => Usuario.fromObject(row));
+      const results = await new Db().query("SELECT * FROM users");
+      return results.rows.map(({id_user, name_user, email_user, password_user, 
+        identification_user, rol_user}) => new Usuario(id_user, name_user, email_user,
+          password_user, identification_user, rol_user));
     } catch (error) {
       console.error("Error al listar usuarios", error);
       throw new CustomError(error.code, error.detail);

@@ -1,16 +1,16 @@
 // Usuario.mjs
 class Usuario {
-    constructor(userId, nombre, correo, contraseña, rol, documento) {
+    constructor(userId, nombre, correo, contraseña, documento, rol) {
       this.userId = userId;
       this.nombre = nombre;
       this.correo = correo;
       this.contraseña = contraseña;
-      this.rol = rol; 
       this.documento = documento;
+      this.rol = rol;      
     }
   
     esAdministrador() {
-      return this.rol === 'administrador';
+      return this.rol === 'ADMIN';
     }
   
     autenticar(contrasena) {
