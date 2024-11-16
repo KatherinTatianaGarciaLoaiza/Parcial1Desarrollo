@@ -1,7 +1,4 @@
-import { Doctor } from "../models/Doctor.mjs";
 import { MedicalAppointment } from "../models/MedicalAppointment.mjs";
-import jwt from "jsonwebtoken";
-import { TOKEN_SECRET, TOKEN_MAX_AGE } from "../config/config.mjs";
 import { DoctorService } from "../services/DoctorService.mjs";
 
 class DoctorController {
@@ -15,14 +12,10 @@ class DoctorController {
     const { email, password } = req.body;
 
     try {
-      const doctor = await this.#doctorService.login(email, password);
-      if (!doctor) {
+      const token = await this.#doctorService.login(email, password);
+      if (!token) {
         return res.status(401).send({ message: "Credenciales inválidas" });
       }
-
-      const token = jwt.sign({ id: doctor.id, email: doctor.email }, TOKEN_SECRET, {
-        expiresIn: TOKEN_MAX_AGE,
-      });
 
       res.status(200).send({ token });
     } catch (error) {
@@ -36,6 +29,7 @@ class DoctorController {
     const { date } = req.query;
 
     try {
+      console.log(doctorId, date);
       const appointments = await this.#doctorService.getAppointments(doctorId, date);
       if (!appointments.length) {
         return res.status(404).send({ message: "No hay citas para este doctor" });
@@ -64,9 +58,10 @@ class DoctorController {
   updateAppointment = async (req, res) => {
     const { appointmentId } = req.params;
     const { patientId, date, hour } = req.body;
+    const { id: doctorId } = req.doctor;
 
     try {
-      const updatedAppointment = await MedicalAppointment.update(appointmentId, patientId, date, hour);
+      const updatedAppointment = await this.#doctorService.updateAppointment(appointmentId, doctorId, patientId, date, hour);
       if (!updatedAppointment) {
         return res.status(404).send({ message: "Cita no encontrada" });
       }
@@ -81,11 +76,10 @@ class DoctorController {
     const { appointmentId } = req.params;
 
     try {
-      const deleted = await MedicalAppointment.delete(appointmentId);
+      const deleted = await this.#doctorService.deleteAppointment(appointmentId);
       if (!deleted) {
         return res.status(404).send({ message: "Cita no encontrada" });
       }
-      res.status(204).end();
     } catch (error) {
       res.status(500).send({ message: "Error al eliminar la cita", error });
     }

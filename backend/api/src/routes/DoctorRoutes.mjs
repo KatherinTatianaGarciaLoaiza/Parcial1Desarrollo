@@ -54,7 +54,9 @@ class DoctorRoutes {
         this.controller.updateAppointment
       )
       // Ruta para eliminar una cita específica
-      .delete(authenticateDoctor, this.controller.deleteAppointment);
+      .delete(
+        authenticateDoctor, 
+        this.controller.deleteAppointment);
   }
 }
 
