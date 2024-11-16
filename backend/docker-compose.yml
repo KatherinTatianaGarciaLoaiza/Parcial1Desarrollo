@@ -1,5 +1,12 @@
 name: backend
 services:
+  db:
+    build: db
+    env_file:
+      - ./db/.env
+    ports:
+      - 5432:5432
+      
   api: 
     build: api
     env_file:
@@ -7,9 +14,4 @@ services:
     ports:
       - 8081:8080
   
-  db:
-    build: db
-    env_file:
-      - ./db/.env
-    ports:
-      - 5432:5432
+  

@@ -1,4 +1,5 @@
 import pg from "pg";
+import { DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT } from "./config.mjs";
 const { Client } = pg;
 
 class Db {
@@ -6,11 +7,11 @@ class Db {
   static conn;
   constructor() {
     const db_options = {
-      user: process.env.DB_USER,
-      host: process.env.DB_HOST, //host
-      database: process.env.DB_NAME,
-      password: process.env.DB_PASSWORD,
-      port: process.env.DB_PORT,
+      user: DB_USER,
+      host: DB_HOST,
+      database: DB_NAME,
+      password: DB_PASSWORD,
+      port: DB_PORT,
     };
     this.#client = new Client(db_options);
     console.log("db client CREATEd");
