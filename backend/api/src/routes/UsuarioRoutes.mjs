@@ -13,11 +13,11 @@ class UsuarioRoutes {
       .get(this.controller.getAll)
       .post(
         [
-          body("nombre").trim().notEmpty(),
-          body("correo").isEmail(),
-          body("contraseña").trim().notEmpty(),
-          body("documento").trim().notEmpty(),
-          body("rol").trim().notEmpty(),          
+          body("name_user").trim().notEmpty(),
+          body("email_user").isEmail(),
+          body("password_user").trim().notEmpty(),
+          body("identification_user").trim().notEmpty(),
+          body("rol_user").trim().notEmpty(),          
         ],
         this.controller.createUsuario
       );

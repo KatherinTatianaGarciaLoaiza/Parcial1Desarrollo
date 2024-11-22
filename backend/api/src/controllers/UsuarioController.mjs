@@ -19,14 +19,14 @@ class UsuarioController {
   };
 
   createUsuario = async (req, res) => {
-    const { nombre, correo, contraseña, rol, documento } = req.body;
-    const result = validationResult(req);
-    if (!result.isEmpty()) {
-      return res.status(400).send({ errors: result.array() });
-    }
+    const { name_user, email_user, password_user, rol_user, identification_user } = req.body;
+    //const result = validationResult(req);
+    //if (!result.isEmpty()) {
+      //return res.status(400).send({ errors: result.array() });
+    //}
 
     try {
-      const usuario = await this.#usuarioService.createUsuario(nombre, correo, contraseña, rol, documento);
+      const usuario = await this.#usuarioService.createUsuario(name_user, email_user, password_user, rol_user, identification_user);
       res.status(201).send(usuario);
     } catch (error) {
       res.status(500).send({ code: error.code, message: error.message });

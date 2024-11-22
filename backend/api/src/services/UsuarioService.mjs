@@ -7,9 +7,7 @@ class UsuarioService {
   getAll = async () => {
     try {
       const results = await new Db().query("SELECT * FROM users");
-      return results.rows.map(({id_user, name_user, email_user, password_user, 
-        identification_user, rol_user}) => new Usuario(id_user, name_user, email_user,
-          password_user, identification_user, rol_user));
+      return results.rows;
     } catch (error) {
       console.error("Error al listar usuarios", error);
       throw new CustomError(error.code, error.detail);
@@ -19,10 +17,10 @@ class UsuarioService {
   createUsuario = async (nombre, correo, contraseña, rol, documento) => {
     try {
       const result = await new Db().query(
-        `INSERT INTO usuario (nombre, correo, contraseña, rol, documento) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+        `INSERT INTO users (name_user, email_user, password_user, rol_user, identification_user) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
         [nombre, correo, contraseña, rol, documento]
       );
-      return result.rowCount ? Usuario.fromObject(result.rows[0]) : null;
+      return result.rows ? result.rows : null;
     } catch (error) {
       console.error("Error al crear usuario", error);
       throw new CustomError(error.code, error.detail);
