@@ -4,7 +4,7 @@ import * as swaggerUi from "swagger-ui-express";
 import { setContentType } from "./middlewares/middleware.mjs";
 import { UsuarioRoutes } from "./routes/UsuarioRoutes.mjs";
 import { ProductoRoutes } from "./routes/ProductoRoutes.mjs";
-
+import { TallaRoutes } from "./routes/TallaRoutes.mjs";
 const app = express();
 
 const options = {
@@ -32,9 +32,11 @@ app.use(setContentType);
 
 const usuarioRoutes = new UsuarioRoutes();
 const productoRoutes = new ProductoRoutes();
+const tallaRoutes = new TallaRoutes();
 
 app.use("/users", usuarioRoutes.router);
 app.use("/products", productoRoutes.router);
+app.use("/sizes", tallaRoutes.router);
 
 app.all("*", (req, res) => {
   res.status(404).send(JSON.stringify({ message: "invalid path" }));
