@@ -35,9 +35,9 @@ class UsuarioController {
 
   updateUsuario = async (req, res) => {
     const { id } = req.params;
-    const { nombre, correo, contraseña, rol } = req.body;
+    const { name_user, email_user, password_user, rol_user, identification_user } = req.body;
     try {
-      const updated = await this.#usuarioService.updateUsuario(id, nombre, correo, contraseña, rol);
+      const updated = await this.#usuarioService.updateUsuario(id, name_user, email_user, password_user, rol_user, identification_user);
       res.status(200).send(updated);
     } catch (error) {
       res.status(500).send({ code: error.code, message: error.message });

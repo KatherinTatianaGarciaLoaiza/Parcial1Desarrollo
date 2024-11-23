@@ -26,10 +26,11 @@ class UsuarioRoutes {
       .route("/:id")
       .put(
         [
-          body("nombre").optional().trim().notEmpty(),
-          body("correo").optional().isEmail(),
-          body("contraseña").optional().trim().notEmpty(),
-          body("rol").optional().trim().notEmpty(),
+          body("name_user").optional().trim().notEmpty(),
+          body("email_user").optional().isEmail(),
+          body("password_user").optional().trim().notEmpty(),
+          body("identification_user").trim().notEmpty(),
+          body("rol_user").optional().trim().notEmpty(),
         ],
         this.controller.updateUsuario
       )

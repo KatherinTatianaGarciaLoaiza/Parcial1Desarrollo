@@ -27,13 +27,13 @@ class UsuarioService {
     }
   };
 
-  updateUsuario = async (id, nombre, correo, contraseña, rol) => {
+  updateUsuario = async (id, nombre, correo, contraseña, rol, documento) => {
     try {
       const result = await new Db().query(
-        `UPDATE usuario SET nombre=$1, correo=$2, contraseña=$3, rol=$4 WHERE id = $5 RETURNING *`,
-        [nombre, correo, contraseña, rol, id]
+        `UPDATE users SET name_user=$1, email_user=$2, password_user=$3, rol_user=$4, identification_user = $5 WHERE id_user = $6 RETURNING *`,
+        [nombre, correo, contraseña, rol, documento, id]
       );
-      return result.rowCount ? Usuario.fromObject(result.rows[0]) : null;
+      return result.rows ? result.rows : null;
     } catch (error) {
       console.error("Error al actualizar usuario", error);
       throw new CustomError(error.code, error.detail);
@@ -43,10 +43,10 @@ class UsuarioService {
   deleteUsuario = async (id) => {
     try {
       const result = await new Db().query(
-        `DELETE FROM usuario WHERE id = $1 RETURNING id`,
+        `DELETE FROM users WHERE id_user = $1 RETURNING id_user`,
         [id]
       );
-      return result.rowCount ? result.rows[0] : null;
+      return result.rows ? result.rows : null;
     } catch (error) {
       console.error("Error al eliminar usuario", error);
       throw new CustomError(error.code, error.detail);
