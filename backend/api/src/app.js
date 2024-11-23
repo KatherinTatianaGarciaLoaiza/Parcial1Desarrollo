@@ -5,6 +5,8 @@ import { setContentType } from "./middlewares/middleware.mjs";
 import { UsuarioRoutes } from "./routes/UsuarioRoutes.mjs";
 import { ProductoRoutes } from "./routes/ProductoRoutes.mjs";
 import { TallaRoutes } from "./routes/TallaRoutes.mjs";
+import { ColorRoutes } from "./routes/ColorRoutes.mjs";
+
 const app = express();
 
 const options = {
@@ -33,10 +35,12 @@ app.use(setContentType);
 const usuarioRoutes = new UsuarioRoutes();
 const productoRoutes = new ProductoRoutes();
 const tallaRoutes = new TallaRoutes();
+const colorRoutes = new ColorRoutes();
 
 app.use("/users", usuarioRoutes.router);
 app.use("/products", productoRoutes.router);
 app.use("/sizes", tallaRoutes.router);
+app.use("/colors", colorRoutes.router);
 
 app.all("*", (req, res) => {
   res.status(404).send(JSON.stringify({ message: "invalid path" }));
