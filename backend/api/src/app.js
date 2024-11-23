@@ -3,6 +3,7 @@ import swaggerJsdoc from "swagger-jsdoc";
 import * as swaggerUi from "swagger-ui-express";
 import { setContentType } from "./middlewares/middleware.mjs";
 import { UsuarioRoutes } from "./routes/UsuarioRoutes.mjs";
+import { ProductoRoutes } from "./routes/ProductoRoutes.mjs";
 
 const app = express();
 
@@ -30,17 +31,11 @@ app.use(express.json());
 app.use(setContentType);
 
 const usuarioRoutes = new UsuarioRoutes();
-//const degreeRoutes = new DegreeRoutes();
-//const facultyRoutes = new FacultyRoutes();
-//const professorRoutes = new ProfessorRoutes();
-//const studentRoutes = new StudentRoutes();
+const productoRoutes = new ProductoRoutes();
 
 app.use("/users", usuarioRoutes.router);
-/*app.use("/degrees", degreeRoutes.router);
-app.use("/faculties", facultyRoutes.router);
-app.use("/professors", professorRoutes.router);
-app.use("/students", studentRoutes.router);
-*/
+app.use("/products", productoRoutes.router);
+
 app.all("*", (req, res) => {
   res.status(404).send(JSON.stringify({ message: "invalid path" }));
 });

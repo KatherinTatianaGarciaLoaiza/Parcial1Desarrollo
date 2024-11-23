@@ -1,7 +1,5 @@
 // ProductoController.mjs
-import { validationResult } from "express-validator";
 import { ProductoService } from "../services/ProductoService.mjs";
-//import { CustomError } from "../utils/CustomError.mjs";
 
 class ProductoController {
   #productoService;
@@ -19,14 +17,10 @@ class ProductoController {
   };
 
   createProducto = async (req, res) => {
-    const { nombre, categoria, precio } = req.body;
-    const result = validationResult(req);
-    if (!result.isEmpty()) {
-      return res.status(400).send({ errors: result.array() });
-    }
+    const { name_product, category_product, price_product } = req.body;
 
     try {
-      const producto = await this.#productoService.createProducto(nombre, categoria, precio);
+      const producto = await this.#productoService.createProducto(name_product, category_product, price_product);
       res.status(201).send(producto);
     } catch (error) {
       res.status(500).send({ code: error.code, message: error.message });
@@ -35,9 +29,9 @@ class ProductoController {
 
   updateProducto = async (req, res) => {
     const { id } = req.params;
-    const { nombre, categoria, precio } = req.body;
+    const { name_product, category_product, price_product } = req.body;
     try {
-      const updated = await this.#productoService.updateProducto(id, nombre, categoria, precio);
+      const updated = await this.#productoService.updateProducto(id, name_product, category_product, price_product);
       res.status(200).send(updated);
     } catch (error) {
       res.status(500).send({ code: error.code, message: error.message });

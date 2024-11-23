@@ -2,6 +2,7 @@
 import { Router } from "express";
 import { body } from "express-validator";
 import { UsuarioController } from "../controllers/UsuarioController.mjs";
+import { authenticateAdmin } from "../middlewares/middleware.mjs";
 
 class UsuarioRoutes {
   constructor() {
@@ -9,9 +10,23 @@ class UsuarioRoutes {
     this.controller = new UsuarioController();
 
     this.router
+    .route("/login")
+    // Ruta para iniciar sesión como médico
+    .post(
+      [
+        body("email_user").isEmail().withMessage("El correo es obligatorio"),
+        body("password_user").notEmpty().withMessage("La contraseña es obligatoria"),
+      ],
+      this.controller.login
+    );
+
+    this.router
       .route("/")
-      .get(this.controller.getAll)
+      .get(
+        authenticateAdmin,
+        this.controller.getAll)
       .post(
+        authenticateAdmin,
         [
           body("name_user").trim().notEmpty(),
           body("email_user").isEmail(),
@@ -25,6 +40,7 @@ class UsuarioRoutes {
     this.router
       .route("/:id")
       .put(
+        authenticateAdmin,
         [
           body("name_user").optional().trim().notEmpty(),
           body("email_user").optional().isEmail(),
@@ -34,7 +50,9 @@ class UsuarioRoutes {
         ],
         this.controller.updateUsuario
       )
-      .delete(this.controller.deleteUsuario);
+      .delete(
+        authenticateAdmin,
+        this.controller.deleteUsuario);
   }
 }
 

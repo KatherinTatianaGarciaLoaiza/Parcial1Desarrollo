@@ -6,8 +6,8 @@ import { CustomError } from "../utils/CustomError.mjs";
 class ProductoService {
   getAll = async () => {
     try {
-      const results = await new Db().query("SELECT * FROM producto");
-      return results.rows.map((row) => Producto.fromObject(row));
+      const results = await new Db().query("SELECT * FROM products");
+      return results.rows ? results.rows : null;
     } catch (error) {
       console.error("Error al listar productos", error);
       throw new CustomError(error.code, error.detail);
@@ -16,11 +16,11 @@ class ProductoService {
 
   createProducto = async (nombre, categoria, precio) => {
     try {
-      const result = await new Db().query(
-        `INSERT INTO producto (nombre, categoria, precio) VALUES ($1, $2, $3) RETURNING *`,
+      const results = await new Db().query(
+        `INSERT INTO products (name_product, category_product, price_product) VALUES ($1, $2, $3) RETURNING *`,
         [nombre, categoria, precio]
       );
-      return result.rowCount ? Producto.fromObject(result.rows[0]) : null;
+      return results.rows ? results.rows : null;
     } catch (error) {
       console.error("Error al crear producto", error);
       throw new CustomError(error.code, error.detail);
@@ -29,11 +29,12 @@ class ProductoService {
 
   updateProducto = async (id, nombre, categoria, precio) => {
     try {
-      const result = await new Db().query(
-        `UPDATE producto SET nombre=$1, categoria=$2, precio=$3 WHERE id = $4 RETURNING *`,
+      console.log(id);
+      const results = await new Db().query(
+        `UPDATE products SET name_product=$1, category_product=$2, price_product=$3 WHERE id_product = $4 RETURNING *`,
         [nombre, categoria, precio, id]
       );
-      return result.rowCount ? Producto.fromObject(result.rows[0]) : null;
+      return results.rows ? results.rows : null;
     } catch (error) {
       console.error("Error al actualizar producto", error);
       throw new CustomError(error.code, error.detail);
@@ -42,11 +43,11 @@ class ProductoService {
 
   deleteProducto = async (id) => {
     try {
-      const result = await new Db().query(
-        `DELETE FROM producto WHERE id = $1 RETURNING id`,
+      const results = await new Db().query(
+        `DELETE FROM products WHERE id_product = $1 RETURNING id_product`,
         [id]
       );
-      return result.rowCount ? result.rows[0] : null;
+      return results.rows ? results.rows : null;
     } catch (error) {
       console.error("Error al eliminar producto", error);
       throw new CustomError(error.code, error.detail);

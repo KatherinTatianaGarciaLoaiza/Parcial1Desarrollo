@@ -1,13 +1,26 @@
 // UsuarioController.mjs
-import { validationResult } from "express-validator";
 import { UsuarioService } from "../services/UsuarioService.mjs";
-//import { CustomError } from "../utils/CustomError.mjs";
 
 class UsuarioController {
   #usuarioService;
   constructor() {
     this.#usuarioService = new UsuarioService();
   }
+
+  // POST: Login del doctor (Retorna JWT si email y password son correctos)
+  login = async (req, res) => {
+    const { email_user, password_user } = req.body;
+    try {
+      const token = await this.#usuarioService.login(email_user, password_user);
+      if (!token) {
+        return res.status(401).send({ message: "Credenciales inválidas" });
+      }
+
+      res.status(200).send({ token });
+    } catch (error) {
+      res.status(500).send({ message: "Error al iniciar sesión", error });
+    }
+  };
 
   getAll = async (req, res) => {
     try {
@@ -20,11 +33,6 @@ class UsuarioController {
 
   createUsuario = async (req, res) => {
     const { name_user, email_user, password_user, rol_user, identification_user } = req.body;
-    //const result = validationResult(req);
-    //if (!result.isEmpty()) {
-      //return res.status(400).send({ errors: result.array() });
-    //}
-
     try {
       const usuario = await this.#usuarioService.createUsuario(name_user, email_user, password_user, rol_user, identification_user);
       res.status(201).send(usuario);
