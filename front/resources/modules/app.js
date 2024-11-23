@@ -75,9 +75,13 @@ export default class App {
                 const price_product = document.createElement('p');
                 price_product.textContent = `Precio: $${product.price_product}`;
 
+                const deleteProduct = document.createElement('button');
+                deleteProduct.textContent = 'Eliminar';
+
                 productCard.appendChild(name_product);
                 productCard.appendChild(document.createElement('br'));
                 productCard.appendChild(price_product);
+                productCard.appendChild(deleteProduct);
 
                 productContainer.appendChild(productCard);
             });
