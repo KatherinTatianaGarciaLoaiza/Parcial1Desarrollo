@@ -6,8 +6,10 @@ import { UsuarioRoutes } from "./routes/UsuarioRoutes.mjs";
 import { ProductoRoutes } from "./routes/ProductoRoutes.mjs";
 import { TallaRoutes } from "./routes/TallaRoutes.mjs";
 import { ColorRoutes } from "./routes/ColorRoutes.mjs";
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 
 const options = {
   definition: {

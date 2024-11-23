@@ -6,10 +6,12 @@ import { createToken } from "../middlewares/middleware.mjs";
 class UsuarioService {
   login = async (email, password) => {
     try {
+      console.log(email, password);
       const result = await new Db().query(
         `SELECT * FROM users WHERE email_user = $1 AND password_user = $2`,
         [email, password]
       );
+      console.log(result.rows);
       if (!result.rowCount) {
         throw new CustomError("401", "Credenciales inválidas");
       }
